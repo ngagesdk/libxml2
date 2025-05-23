@@ -10,7 +10,7 @@ endif()
 
 project(libxml2 VERSION ${VERSION} LANGUAGES C)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 
 include(CheckCSourceCompiles)
 include(CheckFunctionExists)
@@ -23,27 +23,27 @@ include(CMakePackageConfigHelpers)
 include(FindPkgConfig)
 include(GNUInstallDirs)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(LIBXML2_WITH_CATALOG "Add the Catalog support" ON)
 option(LIBXML2_WITH_DEBUG "Add the debugging module" ON)
-option(LIBXML2_WITH_HTML "Add the HTML support" ON)
+option(LIBXML2_WITH_HTML "Add the HTML support" OFF)
 option(LIBXML2_WITH_HTTP "Add the HTTP support" OFF)
-option(LIBXML2_WITH_ICONV "Add ICONV support" ON)
+option(LIBXML2_WITH_ICONV "Add ICONV support" OFF)
 option(LIBXML2_WITH_ICU "Add ICU support" OFF)
 option(LIBXML2_WITH_ISO8859X "Add ISO8859X support if no iconv" ON)
 option(LIBXML2_WITH_LEGACY "Add deprecated APIs for compatibility" OFF)
 option(LIBXML2_WITH_LZMA "Use liblzma" OFF)
-option(LIBXML2_WITH_MODULES "Add the dynamic modules support" ON)
-option(LIBXML2_WITH_OUTPUT "Add the serialization support" ON)
+option(LIBXML2_WITH_MODULES "Add the dynamic modules support" OFF)
+option(LIBXML2_WITH_OUTPUT "Add the serialization support" OFF)
 option(LIBXML2_WITH_PATTERN "Add the xmlPattern selection interface" ON)
-option(LIBXML2_WITH_PROGRAMS "Build programs" ON)
+option(LIBXML2_WITH_PROGRAMS "Build programs" OFF)
 option(LIBXML2_WITH_PUSH "Add the PUSH parser interfaces" ON)
-option(LIBXML2_WITH_PYTHON "Build Python bindings" ON)
+option(LIBXML2_WITH_PYTHON "Build Python bindings" OFF)
 option(LIBXML2_WITH_READLINE "readline support for xmllint shell" OFF)
-option(LIBXML2_WITH_REGEXPS "Add Regular Expressions support" ON)
+option(LIBXML2_WITH_REGEXPS "Add Regular Expressions support" OFF)
 option(LIBXML2_WITH_SAX1 "Add the older SAX1 interface" ON)
-option(LIBXML2_WITH_TESTS "Build tests" ON)
-option(LIBXML2_WITH_THREADS "Add multithread support" ON)
+option(LIBXML2_WITH_TESTS "Build tests" OFF)
+option(LIBXML2_WITH_THREADS "Add multithread support" OFF)
 option(LIBXML2_WITH_TLS "Enable thread-local storage" OFF)
 option(LIBXML2_WITH_VALID "Add the DTD validation support" ON)
 option(LIBXML2_WITH_XINCLUDE "Add the XInclude support" ON)
@@ -400,13 +400,13 @@ if(LIBXML2_WITH_ZLIB)
     endif()
 endif()
 
-if(CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
-    # These compiler flags can break the checks above so keep them here.
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic -Wall -Wextra -Wshadow \
--Wpointer-arith -Wcast-align -Wwrite-strings \
--Wstrict-prototypes -Wmissing-prototypes \
--Wno-long-long -Wno-format-extra-args -Wno-array-bounds")
-endif()
+#if(CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
+#    # These compiler flags can break the checks above so keep them here.
+#    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic -Wall -Wextra -Wshadow \
+#-Wpointer-arith -Wcast-align -Wwrite-strings \
+#-Wstrict-prototypes -Wmissing-prototypes \
+#-Wno-long-long -Wno-format-extra-args -Wno-array-bounds")
+#endif()
 
 set(LIBXML_MINOR_COMPAT 14)
 math(EXPR LIBXML_SOVERSION "${LIBXML_MAJOR_VERSION} + ${LIBXML_MINOR_COMPAT}")
@@ -417,7 +417,7 @@ set_target_properties(
     PROPERTIES
     IMPORT_PREFIX lib
     OUTPUT_NAME xml2
-    POSITION_INDEPENDENT_CODE ON
+    POSITION_INDEPENDENT_CODE OFF
     PREFIX lib
     VERSION "${LIBXML_SOVERSION}.${LIBXML_AGE}.${LIBXML_MICRO_VERSION}"
     SOVERSION ${LIBXML_SOVERSION}

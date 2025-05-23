@@ -14,6 +14,7 @@
 #include "libxml.h"
 #include <libxml/chvalid.h>
 
+#include <stdlib.h>
 #include <stddef.h>
 
 /*
