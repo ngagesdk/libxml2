@@ -9,6 +9,12 @@
 #ifndef __XML_LIBXML_H__
 #define __XML_LIBXML_H__
 
+#ifdef __NGAGE__
+#include <SDL3/SDL.h>
+#define snprintf SDL_snprintf
+#define vsnprintf SDL_vsnprintf
+#endif
+
 /*
  * These macros must be defined before including system headers.
  * Do not add any #include directives above this block.
